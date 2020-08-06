@@ -1,0 +1,625 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>鲁虺万年历</title>
+		 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+		 <meta name="keywords" content="鲁虺万年历，鲁虺日历，鲁虺日历查询，鲁虺农历，鲁虺日历表，鲁虺阴历" />
+		 <meta name="description" content="鲁虺万年历，最适合中国人的日历，为您提供日历查询、鲁虺农历查询、鲁虺黄历查询、鲁虺日历表等功能。" />
+		<meta name="format-detection"content="telephone=no">
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<link rel="stylesheet" href="css/layout.css" />
+		<link rel="stylesheet" href="css/wnlImprove.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<!-- 为了防止juery啊ajax请求在IE6下崩溃,故对jquery的ajax请求进行了修改 -->
+		<script src="js/jquery.js"></script>
+		<script src="js/common_util.js"></script>
+		<script type="text/javascript">
+			var userAgent = navigator.userAgent.toLowerCase();
+			var platform;
+			if(userAgent == null || userAgent == ''){
+				platform = 'WEB' ; 
+			}else{
+				if(userAgent.indexOf("android") != -1 ){ 
+					platform = 'ANDROID';
+				}else if(userAgent.indexOf("ios") != -1 || userAgent.indexOf("iphone") != -1 || userAgent.indexOf("ipad") != -1){ 
+					platform = 'IOS';
+				}else if(userAgent.indexOf("windows phone") != -1 ){ 
+					platform = 'WP';
+				}else{
+					platform = 'WEB' ;
+				}
+			}
+		</script>
+	</head>
+    <body>
+		<div class='body clearfix ' id='body' style='left:0;'>
+			<div class='layout'>
+				<div class='windows'>
+					<div id="indexWindow" class='indexW'>
+						<div class='head clearfix'>
+							<div class='fll' id='prev_button_a'><img src="img/prev.jpg" border="0" width="29 " height="36 " style="cursor:pointer;"/></div>
+							<div class='yearmonth'>
+								<div class='year jp-dropdown' id='dropdownYear'>
+									<div class="inlineblock">
+										<div class='numberCal'><span id='yearValue'>2014</span>年<span id='monthValue'>6</span>月</div>
+									</div>
+								</div>
+							</div>
+							<div class='fll' id='next_button_a'><img src="img/next.jpg" border="0" width="29 " height="36 " style="cursor:pointer;"/></div>
+							<div class='todayCal' id='today_button'><img src="img/todayon.jpg" border="0" width="42 " height="36 " style="cursor:pointer;"/></div>
+							<div class='festivalCal' id='festival_button'><img src="img/festival.jpg" border="0" width="65 " height="36 " style="cursor:pointer;"/></div>
+						</div>
+						<div class='content clearfix' id="content">
+							<div class='calendar' id='mainCal'>							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div class="mothDayBody none clearfix" id='mothDayBody' style='left:100%;'>
+		     <div class='layout'>
+				<div class='windowsDay'>
+					<div id="indexWindow" class='indexW'>
+						<div class='head clearfix'>
+							<div class='fll back_button_a' id='back_button_day' style="width:60px; position: absolute;"><img src="img/back.jpg" border="0" width="60 " height="36 " style="cursor:pointer;"/></div>
+							<div class='yearMonth'>
+									<div class="inlineblock">
+										<div class='numberCal'><span id='yearDayValue'>2013</span>年<span id='monthMValue'>6</span>月</div>
+									</div>						
+							</div>
+							<div class='todayCalMonth' id='today_button_today' style="width:61px; height:36px; margin-top:-35px;"><img src="img/todayMonth.jpg" border="0" width="61 " height="36 " style="cursor:pointer; position: relative;"/></div>
+						</div>
+						<div class='contentM clearfix' id='contentM' style='overflow-y:auto;'>
+							<div class="contentDay" id='contentDay'>
+							     <div class="clearfix" style='position:relative;'>
+								     <div class='fll' id='prev_button_day' style="width:59px; position: absolute;"><img src="img/dayPrev.jpg" border="0" width="59 " height="59 " style="cursor:pointer;"/></div>
+									<div class='yearmonthNumber'>
+												<div class="inlineblock">
+													<div class='numberCalDay'><span id='monthDayValue'></span></div>
+												</div>
+									</div>
+								    <div class='flr' id='next_button_day' style="width:59px; height:59px; margin-top:-35px;"><img src="img/dayNext.jpg" border="0" width="59 " height="59 " style="cursor:pointer; position: relative;"/></div>
+							   </div>
+							   <div class="clearfix lMonthDay">
+							          	农历<span id='chinaDay'></span><span id='chinaWeek' class="ml5"></span>							   </div>
+							   <div class="clearfix lMonthji">
+								   <div class="inlineblock">
+									   <span id='chinaDay2' class='fll'></span>
+										<span id='chinaDay3' class='fll'></span>								 </div>
+							  </div>
+							</div>
+							<div id="yjlist" class='yjlistDay'>
+							    <div class='ylist clearfix'>
+								    <div style="width:100%;"><div class="fll" style="width:40px; margin-right:-40px;"><span class='ylistName fll'>宜</span></div></div>
+						            <span id='ylist' class="fll yjcolor" style="margin-left:50px; padding-right:10px;"></span>								</div>
+								<div class='jlist clearfix'>
+								<div style="width:100%;"><div class="fll" style="width:40px; margin-right:-40px;"><span class='jlistName fll'>忌</span></div></div>
+						            <span id='jlist' class="fll yjcolor" style="margin-left:50px; padding-right:10px;"></span>								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	
+		<div class="festivalDayBody none clearfix " id='festivalDayBody' style='left:100%;'>
+		     <div class='layout'>
+				<div class='windowsDay'>
+					<div id="indexWindow" class='indexW'>
+						<div class='head clearfix'>
+							<div class='fll back_button_a' id='back_button_a'><img src="img/back.jpg" border="0" width="60 " height="36 " style="cursor:pointer;"/></div>
+							<div class='todayCalMonth  ml5 festuvalOn' id='festivaHoliday_button1'><img src="img/festivalDay.jpg" border="0" width="86 " height="40 " style="cursor:pointer;"/></div>
+							<div class='todayCalMonth' id='chinaFestival_button1'><img src="img/chinaFestival.jpg" border="0" width="86 " height="36 " style="cursor:pointer;"/></div>
+						</div>
+						<div class='contentM clearfix' id='fcontentM'>
+							<div class='festivalContent'>
+							     <div class="festivalTop">全年公休放假安排</div>
+							     <table id='fcontentMTable'>
+							     	<tr>
+							     		<td id="yuandanFestival" class="cursor">
+							     			<div class="inlineblock" >
+							                    <div class="festival_title">元旦</div>
+							                    <div class="festival_time">1月1日~3日</div>
+							               </div>							     		</td>
+							     		<td id="chunjieFestival" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="festival_title">春节</div>
+							                    <div class="festival_time">2月18日~24日</div>
+							               </div>							     		</td>
+							     	</tr>
+							     	<tr>
+							     		<td id="qingmingFestival" class="cursor">
+							     			<div class="inlineblock" >
+							                    <div class="festival_title">清明节</div>
+							                    <div class="festival_time">4月4日~6日</div>
+							               </div>							     		</td>
+							     		<td id="laodongFestival" class="cursor">
+							     			<div class="inlineblock" >
+							                    <div class="festival_title">劳动节</div>
+							                    <div class="festival_time">5月1日~3日</div>
+							               </div>							     		</td>
+							     	</tr>
+							     	<tr>
+							     		<td id="duanwuFestival" class="cursor">
+							     			<div class="inlineblock" >
+							                    <div class="festival_title">端午节</div>
+							                    <div class="festival_time">6月20日~22日</div>
+							               </div>							     		</td>
+							     		<td id="kangzhanFestival" class="cursor">
+							     			<div class="inlineblock" >
+							                    <div class="festival_title">抗战纪念日</div>
+							                    <div class="festival_time">9月3日~5日</div>
+							               </div>							     		</td>
+							     	</tr>
+							     	<tr>
+							     	    <td id="zhongqiuFestival" class="cursor">
+							     			<div class="inlineblock" >
+							                    <div class="festival_title">中秋节</div>
+							                    <div class="festival_time">9月26日~27日</div>
+							               </div>							     		</td>
+							     		<td id="guoqingFestival" class="cursor">
+							               <div class="inlineblock">
+							                    <div class="festival_title">国庆节</div>
+							                    <div class="festival_time">10月1日~7日</div>
+							               </div>							     		</td>
+							     		<td id="festivalLast"></td>
+							     	</tr>
+							     </table>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	
+		<div class="chinaFestivalBody none clearfix " id='chinaFestivalBody' style='left:100%;'>
+		     <div class='layout'>
+				<div class='windowsDay'>
+					<div id="indexWindow" class='indexW'>
+						<div class='head clearfix'>
+							<div class='fll back_button_a' id='back_button_aa'><img src="img/back.jpg" border="0" width="60 " height="36 " style="cursor:pointer;"/></div>
+							<div class='todayCalMonth  ml5' id='festivaHoliday_button'><img src="img/festivalHoliday.jpg" border="0" width="86 " height="36 " style="cursor:pointer;"/></div>
+							<div class='todayCalMonth festuvalOn' id='chinaFestival_button'><img src="img/chinaFestivalDay.jpg" border="0" width="86 " height="40 " style="cursor:pointer;"/></div>
+						</div>
+						<div class='contentM clearfix' id="cContentM">
+							<div class='chinaFestivalContent'>
+							     <div class="festivalTopM">中国农历-二十四节气</div>
+							     <table id='cContentMMTable'>
+							     	<tr>
+							     		<td id="lichun" class="cursor">
+							     			<div class="inlineblock" >
+							                    <div class="china_title">立春</div>
+							               </div>							     		</td>
+							     		<td id="yushu" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">雨水</div>
+							               </div>							     		</td>
+							     		<td id="jingzhe" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">惊蛰</div>
+							               </div>							     		</td>
+							     		<td id="chunfen" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">春分</div>
+							               </div>							     		</td>
+							     	</tr>
+							     	<tr>
+							     		<td id="qingming" class="cursor">
+							     			<div class="inlineblock" >
+							                    <div class="china_title">清明</div>
+							               </div>							     		</td>
+							     		<td id="guyu" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">谷雨</div>
+							               </div>							     		</td>
+							     		<td id="lixia" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">立夏</div>
+							               </div>							     		</td>
+							     		<td id="xiaoman" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">小满</div>
+							               </div>							     		</td>
+							     	</tr>
+							     	<tr>
+							     		<td id="mangzhong" class="cursor">
+							     			<div class="inlineblock" >
+							                    <div class="china_title">芒种</div>
+							               </div>							     		</td>
+							     		<td id="xiazhi" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">夏至</div>
+							               </div>							     		</td>
+							     		<td id="xiaoshu" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">小暑</div>
+							               </div>							     		</td>
+							     		<td id="dashu" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">大暑</div>
+							               </div>							     		</td>
+							     	</tr>
+							     	<tr>
+							     		<td id="liqiu" class="cursor">
+							     			<div class="inlineblock" >
+							                    <div class="china_title">立秋</div>
+							               </div>							     		</td>
+							     		<td id="chushu" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">处暑</div>
+							               </div>							     		</td>
+							     		<td id="bailu" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">白露</div>
+							               </div>							     		</td>
+							     		<td id="qiufen" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">秋分</div>
+							               </div>							     		</td>
+							     	</tr>
+							     	<tr>
+							     		<td id="hanlu" class="cursor">
+							     			<div class="inlineblock" >
+							                    <div class="china_title">寒露</div>
+							               </div>							     		</td>
+							     		<td id="shuangjiang" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">霜降</div>
+							               </div>							     		</td>
+							     		<td id="lidong" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">立冬</div>
+							               </div>							     		</td>
+							     		<td id="xiaoxue" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">小雪</div>
+							               </div>							     		</td>
+							     	</tr>
+							     	<tr>
+							     		<td id="daxue" class="cursor">
+							     			<div class="inlineblock" >
+							                    <div class="china_title">大雪</div>
+							               </div>							     		</td>
+							     		<td id="dongzhi" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">冬至</div>
+							               </div>							     		</td>
+							     		<td id="xiaohan" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">小寒</div>
+							               </div>							     		</td>
+							     		<td id="dahan" class="cursor">
+							     			<div class="inlineblock">
+							                    <div class="china_title">大寒</div>
+							               </div>							     		</td>
+							     	</tr>
+							     </table>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	
+		<div class="chinaFestivalMoreBody none clearfix " id='chinaFestivalMoreBody'>
+		     <div class='layout'>
+				<div class='windowsDay'>
+					<div id="indexWindow" class='indexW'>
+						<div class='head clearfix'>
+							<div class='fll back_button_china' id='back_button_china'><img src="img/back.jpg" border="0" width="60 " height="36 " style="cursor:pointer;"/></div>
+						</div>
+						<div class='contentM clearfix' id="cBcontentM" style='overflow-y: auto;'>
+							<div class='chinaFestivalContent none' id="dahan">
+							     <div class="chianFestival_title">大寒</div>
+							     <div class="chianFestival_summary">2015年大寒时间是1月20日</div>
+							     <div class="chianFestival_content">
+							        <div class="paraMessage">大寒是二十四节气中最后一个节气，每年1月20日前后太阳到达黄经300°时为“大寒”。大寒，是天气寒冷到极点的意思。这时寒潮南下频繁，是我国大部地区一年中的寒冷时期，风大，低温，地面积雪不化，呈现出冰天雪地、天寒地冻的严寒景象。大寒是中国二十四节气最后一个节气，过了大寒，又迎来新一年的节气轮回。</div>
+									<div class="paraMessage">大寒节气里，各地农活依旧很少。北方地区老百姓多忙于积肥堆肥，为开春作准备；或者加强牲畜的防寒防冻。南方地区则仍加强小麦及其他作物的田间管理。广东岭南地区有大寒联合捉田鼠的习俗。因为这时作物已收割完毕，平时看不到的田鼠窝多显露出来，大寒也成为岭南当地集中消灭田鼠的重要时机。</div>
+							     </div>
+							</div>
+							<div class='chinaFestivalContent none' id="lichun">
+							     <div class="chianFestival_title">立春</div>
+							     <div class="chianFestival_summary">2015年立春时间是2月4日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">立春，是二十四节气中的第1个节气，指太阳到达黄经315°时，为公历每年2月3至5日之间，表示着春天的开始，有说属相（生肖）即以立春作为起始点。从这一天一直到立夏这段期间，都被称为春天。</div>
+									 <div class="paraMessage">中国古代将立春的十五天分为三候：“一候东风解冻，二候蜇虫始振，三候鱼陟负冰”，说的是东风送暖，大地开始解冻。立春五日后，蛰居的虫类慢慢在洞中苏醒，再过五日，河里的冰开始溶化，鱼开始到水面上游动，此时水面上还有没完全溶解的碎冰片，如同被鱼负着一般浮在水面。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="yushu">
+							     <div class="chianFestival_title">雨水</div>
+							     <div class="chianFestival_summary">2015年雨水时间是2月19日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">雨水，是二十四节气之中的第2个节气，每年在2月18-20日之间。太阳位于黄经330这天通常出嫁的女儿要回家探望父母，要给母亲送一段红绸和炖一罐肉。</div>
+									 <div class="paraMessage">此时，气温回升、冰雪融化、降水增多，故取名为雨水。雨水节气一般从2月18日或19日开始，到3月4日或5日结束。雨水和谷雨、小雪、大雪一样，都是反映降水现象的节气。</div>
+									 <div class="paraMessage">《月令七十二候集解》：“正月中，天一生水。春始属木，然生木者必水也，故立春后继之雨水。且东风既解冻，则散而为雨矣。”意思是说，雨水节气前后，万物开始萌动，春天就要到了。</div> 
+								 </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="jingzhe">
+							     <div class="chianFestival_title">惊蛰</div>
+							     <div class="chianFestival_summary">2015年惊蛰时间是3月6日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">惊蛰，古称“启蛰”，二十四节气之中的第3个节气。在3月6日前后太阳到达黄经345°时开始。这时天气转暖，渐有春雷，动物入冬藏伏土中，不饮不食，称为“蛰”，而“惊蛰”即上天以打雷惊醒蛰居动物的日子。这时中国大部分地区进入春耕季节。</div>
+									<div class="paraMessage">我国古代将惊蛰分为三候：“一候桃始华；二候仓庚（黄鹂）鸣；三候鹰化为鸠。”描述已是进入仲春，桃花红、梨花白，黄莺鸣叫、燕飞来的时节。惊蛰节气人们要注意气象台对强冷空气活动的预报，当心冷暖变化，预防感冒等季节性疾病的流行。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="chunfen">
+							     <div class="chianFestival_title">春分</div>
+							     <div class="chianFestival_summary">2015年春分时间是3月21日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">春分，是春季九十天的中分点。二十四节气之一。太阳位于黄经0°（春分点）的日子。</div>
+									<div class="paraMessage">《月令七十二候集解》：“二月中，分者半也，此当九十日之半，故谓之分。秋同义。”《春秋繁露•阴阳出入上下篇》说：“春分者，阴阳相半也，故昼夜均而寒暑平。”</div>
+									<div class="paraMessage">在每年的春分那一天，世界各地都会有数以千万计的人在做“竖蛋”试验。其玩法确简单易行且富有趣味：选择一个光滑匀称、刚生下四五天的新鲜鸡蛋，轻手轻脚地在桌子上把它竖起来。虽然失败者颇多，但成功者也不少。春分成了竖蛋游戏的最佳时光，故有“春分到，蛋儿俏”的说法。竖立起来的蛋儿好不风光。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="qingming">
+							     <div class="chianFestival_title">清明</div>
+							     <div class="chianFestival_summary">2015年清明时间是4月5日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">清明，每年4月5日前后太阳到达黄经15°时开始；《月令七十二候集解》：“三月节……物至此时，皆以洁齐而清明矣。”故清明节总是在公历4月4日、4月5日、4月6日三天中的一天。</div>
+									<div class="paraMessage">清明节的起源，据传始于古代帝王将相“墓祭”之礼，后来民间亦相仿效，于此日祭祖扫墓，历代沿袭而成为中华民族一种固定的风俗。本来，寒食节与清明节是两个不同的节日，到了唐朝，将祭拜扫墓的日子定为寒食节。寒食节正确的日子是在冬至后一百零五天，约在清明前后，因两者日子相近，所以便将清明与寒食合并为一日。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="guyu">
+							     <div class="chianFestival_title">谷雨</div>
+							     <div class="chianFestival_summary">2015年谷雨时间是4月20日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">谷雨是二十四节气的第六个节气，每年4月19日～21日视太阳到达黄经30°时为谷雨，源自古人“雨生百谷”之说。同时也是播种移苗、埯瓜点豆的最佳时节。“清明断雪，谷雨断霜”，气象专家表示，谷雨是春季最后一个节气，谷雨节气的到来意味着寒潮天气基本结束，气温回升加快，大大有利于谷类农作物的生长。</div>
+									<div class="paraMessage">“谷雨前，好种棉”，又云：“谷雨不种花，心头像蟹爬”。自古以来，棉农把谷雨节作为棉花播种指标，编成谚语，世代相传。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="lixia">
+							     <div class="chianFestival_title">立夏</div>
+							     <div class="chianFestival_summary">2015年立夏时间是5月6日</div>
+							     <div class="chianFestival_content">
+                                      <div class="paraMessage">每年5月5日或5月6日是农历的立夏，“斗指东南，维为立夏，万物至此皆长大，故名立夏也。”此时，太阳黄经为45度，在天文学上，立夏表示即将告别春天，是夏日天的开始。人们习惯上都把立夏当作是温度明显升高，炎暑将临，雷雨增多，农作物进入旺季生长的一个重要节气。</div>
+									<div class="paraMessage">在立夏的这天，古代帝王要率文武百官到京城南郊去迎夏，举行迎夏仪式。君臣一律穿朱色礼服，配朱色玉佩，连马匹、车旗都要朱红色的，以表达对丰收的企求和美好的愿望。在民间，立夏日人们则喝冷饮来消暑。立夏日，江南水乡有烹食嫩蚕豆的习俗。有的地方还有立夏日称人的习俗。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="xiaoman">
+							     <div class="chianFestival_title">小满</div>
+							     <div class="chianFestival_summary">2015年小满时间是5月21日</div>
+							     <div class="chianFestival_content">
+                                      <div class="paraMessage">小满，夏季第二个节气。其含义是夏熟作物的籽粒开始灌浆饱满，但还未成熟，只是小满，还未大满。每年5月20日到22日之间视太阳到达黄径60°时为小满。</div>
+									<div class="paraMessage">春风吹苦菜长，荒滩野地是粮仓。苦菜是中国人最早食用的野菜之一。苦苦菜，苦中带涩，涩中带甜，新鲜爽口，清凉嫩香，营养丰富，含有人体所需要的多种维生素、矿物质、胆碱、糖类、核黄素和甘露醇等，具有清热、凉血和解毒的功能。</div>
+									<div class="paraMessage">小满节气台湾彰化附近的海域可捕获黑鲳，东北部的苏澳及南部海域则可捕获到飞鱼。高雄县的旗山、美浓等地的香蕉已经进入盛产期。台湾是有名的香蕉出产地，每年都有很多香蕉外销到世界各地。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="mangzhong">
+							     <div class="chianFestival_title">芒种</div>
+							     <div class="chianFestival_summary">2015年芒种时间是6月6日</div>
+							     <div class="chianFestival_content">
+                                      <div class="paraMessage">芒种一般在6月6日前后，太阳到达黄经75°的时候。芒种字面的意思是“有芒的麦子快收，有芒的稻子可种”。《月令七十二侯集解》：“五月节，谓有芒之种谷可稼种矣。”此时中国长江中下游地区将进入多雨的黄梅时节。</div>
+									<div class="paraMessage">我国古代将芒种分为三候：“一候螳螂生；二候鹏始鸣；三候反舌无声。”在这一节气中，螳螂在上一年深秋产的卵因感受到阴气初生而破壳生出小螳螂；喜阴的伯劳鸟开始在枝头出现，并且感阴而鸣。与此相反，能够学习其它鸟叫的反舌鸟，却因感应到了阴气的出现而停止了鸣叫。</div>
+									<div class="paraMessage">芒种时节民俗有送花神、安苗、打泥巴仗、煮梅。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="xiazhi">
+							     <div class="chianFestival_title">夏至</div>
+							     <div class="chianFestival_summary">2015年夏至时间是6月22日</div>
+							     <div class="chianFestival_content">
+							         <div class="paraMessage">夏至在每年公历6月21日或22日。夏至这天，太阳直射地面的位置到达一年的最北端，几乎直射北回归线，此时，北半球的白昼达最长，且越往北越长。</div>
+  									<div class="paraMessage">我国古代将夏至分为三候：“一候鹿角解；二候蝉始鸣；三候半夏生。”糜与鹿虽属同科，但古人认为，二者一属阴一属阳。鹿的角朝前生，所以属阳。夏至日阴气生而阳气始衰，所以阳性的鹿角便开始脱落。而糜因属阴，所以在冬至日角才脱落；雄性的知了在夏至后因感阴气之生便鼓翼而鸣；半夏是一种喜阴的药草，因在仲夏的沼泽地或水田中出生所以得名。由此可见，在炎热的仲夏，一些喜阴的生物开始出现，而阳性的生物却开始衰退了。</div>				     
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="xiaoshu">
+							     <div class="chianFestival_title">小暑</div>
+							     <div class="chianFestival_summary">2015年小暑时间是7月7日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">小暑，每年7月7日或8日视太阳到达黄经105°时为小暑；暑，表示炎热的意思，小暑为小热，还不十分热。意指天气开始炎热，但还没到最热，全国大部分地区基本符合。全国的农作物都进入了茁壮成长阶段，需加强田间管理。</div>
+ 									 <div class="paraMessage">我国古代将小暑分为三候：“一候温风至；二候蟋蟀居宇；三候鹰始鸷。”小暑时节大地上便不再有一丝凉风，而是所有的风中都带着热浪；《诗经•七月》中描述蟋蟀的字句有“七月在野，八月在宇，九月在户，十月蟋蟀入我床下。”文中所说的八月即是夏历的六月，即小暑节气的时候，由于炎热，蟋蟀离开了田野，到庭院的墙角下以避暑热；在这一节气中，老鹰因地面气温太高而在清凉的高空中活动。</div>			     
+						     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="dashu">
+							     <div class="chianFestival_title">大暑</div>
+							     <div class="chianFestival_summary">2015年大暑时间是7月23日</div>
+							     <div class="chianFestival_content">
+                                      <div class="paraMessage">大暑，在每年的7月22日至24日之间，太阳到达黄经120°。这时正值“中伏”前后，是一年中最热的时期，气温最高，农作物生长最快，大部分地区的旱、涝、风灾也最为频繁，抢收抢种，抗旱排涝防台和田间管理等任务很重。民间有饮伏茶，晒伏姜，烧伏香等习俗。</div>
+									<div class="paraMessage">大暑节气日本人会在社区里架起了长长的竹筒，把煮好的面条放到竹筒中过水冷却，供大家品尝。据说吃过这种竹筒冷面后夏天不会中暑。</div>
+									<div class="paraMessage">在大暑节那天，莆田人家有吃荔枝、羊肉和米糟的习俗，叫做“过大暑”。在大暑节那天，亲友之间，常以荔枝、羊肉为互赠的礼品。</div>
+									<div class="paraMessage">大暑是乡村田野蟋蟀最多的季节，中国有些地区的人们茶余饭后有以斗蟋蟀为乐的风俗。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="liqiu">
+							     <div class="chianFestival_title">立秋</div>
+							     <div class="chianFestival_summary">2015年立秋时间是8月8日</div>
+							     <div class="chianFestival_content">
+                                     <div class="paraMessage">立秋，是二十四节气中的第13个节气，每年8月7日或8日立秋。“秋”就是指暑去凉来，意味着秋天的开始。到了立秋，梧桐树开始落叶，因此有“落一叶而知秋”的成语。从文字角度来看，“秋”字由禾与火字组成，是禾谷成熟的意思。秋季是天气由热转凉，再由凉转寒的过渡性季节，立秋是秋季的第一个节气。</div>
+									<div class="paraMessage">夏历八月十五日，是为中秋节。这天夜里婚后尚未生育的妇女，在小姑或其他女伴的陪同下，到田野瓜架、豆棚下，暗中摸索摘取瓜豆，故名摸秋。俗谓摸南瓜，易生男孩；摸扁豆，易生女孩；摸到白扁豆更吉利，除生女孩外，还是白头到老的好兆头。</div>
+                                 </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="chushu">
+							     <div class="chianFestival_title">处暑</div>
+							     <div class="chianFestival_summary">2015年处暑时间是8月23日</div>
+							     <div class="chianFestival_content">
+							        <div class="paraMessage">处暑，是二十四节气之中的第14个节气，在8月23日前后，太阳到达黄经150°。</div>
+									<div class="paraMessage">处暑的“处”是指“终止”，处暑的意义是“夏天暑热正式终止”。所以有俗语说：争秋夺暑，是指立秋和处暑之间的时间，虽然秋季在意义上已经来临，但夏天的暑气仍然未减。</div>
+									<div class="paraMessage">祭祖、迎秋处暑节气前后的民俗多与祭祖及迎秋有关。处暑前后民间会有庆赞中元的民俗活动，俗称“作七月半”或“中元节”。 旧时民间从七月初一起，就有开鬼门的仪式，直到月底关鬼门止，都会举行普渡布施活动。据说普度活动由开鬼门开始，然后竖灯篙，放河灯招致孤魂；而主体则在搭建普度坛,架设孤棚，穿插抢孤等行事，最后以关鬼门结束。时至今日，已成为祭祖的重大活动时段。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="bailu">
+							     <div class="chianFestival_title">白露</div>
+							     <div class="chianFestival_summary">2015年白露时间是9月8日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">白露，每年在9月7-9日之间。太阳位于黄经165°。</div>
+									<div class="paraMessage">白露是九月的头一个节气[1]。露是由于温度降低，水汽在地面或近地物体上凝结而成的水珠。所以，白露实际上是表征天气已经转凉。这时，人们就会明显地感觉到炎热的夏天已过，而凉爽的秋天已经到来了。</div>
+									<div class="paraMessage">到了白露节气，秋意渐浓。旧时南京人十分重视节气的“来”和“去”，逐渐形成了具有南京地方特色的节气习俗。</div>
+									<div class="paraMessage">说到白露，爱喝茶的老南京都十分青睐“白露茶”，此时的茶树经过夏季的酷热，白露前后正是它生长的极好时期。白露茶既不像春茶那样鲜嫩，不经泡，也不像夏茶那样干涩味苦，而是有一种独特甘醇清香味，尤受老茶客喜爱。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="qiufen">
+							     <div class="chianFestival_title">秋分</div>
+							     <div class="chianFestival_summary">2015年秋分时间是9月23日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">秋分（autumnal equinox），农历二十四节气中的第十六个节气，时间一般为每年的9月22或23日。南方的气候由这一节气起才始入秋。一是太阳在这一天到达黄经180度，直射地球赤道，因此这一天24小时昼夜均分，各12小时；全球无极昼极夜现象。秋分之后，北极附近极夜范围渐大，南极附近极昼范围渐大。</div>
+									<div class="paraMessage">我国古代将秋分分为三候：“一候雷始收声；二候蛰虫坯户；三候水始涸”。古人认为雷是因为阳气盛而发声，秋分后阴气开始旺盛，所以不再打雷了。</div>
+									<div class="paraMessage">秋天是肠道传染病、疟疾、乙脑的多发季节，也常引起许多旧病，如胃病、老慢支、哮喘等的复发，患高血压、冠心病、糖尿病的中老年人若疏忽防范，则会加重危险。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="hanlu">
+							     <div class="chianFestival_title">寒露</div>
+							     <div class="chianFestival_summary">2015年寒露时间是10月8日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">每年10月8日或9日视太阳到达黄经195°时为寒露。我国古代将寒露分为三候：“一候鸿雁来宾；二候雀入大水为蛤；三候菊有黄华。”此节气中鸿雁排成一字或人字形的队列大举南迁；深秋天寒，雀鸟都不见了，古人看到海边突然出现很多蛤蜊，并且贝壳的条纹及颜色与雀鸟很相似，所以便以为是雀鸟变成的；第三候的“菊始黄华”是说在此时菊花已普遍开放。</div>
+									<div class="paraMessage">白露后，天气转凉，开始出现露水，到了寒露，则露水增多，且气温更低。此时我国有些地区会出现霜冻，北方已呈深秋景象，白云红叶，偶见早霜，南方也秋意渐浓，蝉噤荷残。</div> 
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="shuangjiang">
+							     <div class="chianFestival_title">霜降</div>
+							     <div class="chianFestival_summary">2015年霜降时间是10月24日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">每年阳历10月23日前后，太阳到达黄经210度时为二十四节气中的霜降。霜降节气含有天气渐冷、初霜出现的意思，是秋季的最后一个节气，也意味着冬天的开始，霜降时节，养生保健尤为重要，民间有谚语“一年补透透，不如补霜降”，足见这个节气对我们的影响。</div>
+									<div class="paraMessage">霜降作为秋季的最后一个节气，此时天气渐凉，秋燥明显，燥易伤津。霜降养生首先要重视保暖，其次要防秋燥，运动量可适当加大。饮食调养方面，此时宜平补，要注意健脾养胃，调补肝肾，可多吃健脾养阴润燥的食物，玉蜀黍、萝卜、栗子、秋梨、百合、蜂蜜、淮山、奶白菜、牛肉、鸡肉、泥鳅等都不错。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="lidong">
+							     <div class="chianFestival_title">立冬</div>
+							     <div class="chianFestival_summary">2015年立冬时间是11月8日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">“立冬”节气，在每年的11月7日或8日，古时民间习惯以立冬为冬季开始。我国幅员广大，除全年无冬的华南沿海和长冬无夏的青藏高原地区外，各地的冬季并不都是于立冬日同时开始的。</div>
+									<div class="paraMessage">立冬与立春、立夏、立秋合称四立，在古代社会中是个重要的节日，这一天皇帝会率领文武百官到京城的北郊设坛祭祀。在现在，人们在立冬之日，也要庆祝。</div>
+									<div class="paraMessage">立冬与立春、立夏、立秋合称四立、古代社会中是个重要的节日。过去是个农耕社会，劳动了一年，利用立冬这一天要休息，顺便犒赏一家人的辛苦。谚语“立冬补冬，补嘴空”就是最好的比喻。古时此日，天子有出郊迎冬之礼，并有赐群臣冬衣、矜恤孤寡之制。后世大体相同。</div>     
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="xiaoxue">
+							     <div class="chianFestival_title">小雪</div>
+							     <div class="chianFestival_summary">2015年小雪时间是11月22日</div>
+							     <div class="chianFestival_content">
+							         <div class="paraMessage">11月22或23日为小雪节气。我国广大地区东北风开始成为常客，气温下降，逐渐降到0℃以下，但大地尚未过于寒冷，虽开始降雪，但雪量不大，故称小雪。此时阳气上升，阴气下降，而致天地不通，阴阳不交，万物失去生机，天地闭塞而转入严冬。黄河以北地区会出现初雪，提醒人们该御寒保暖了。</div>
+									<div class="paraMessage">我国古代将小雪分为三候：“一候虹藏不见；二候天气上升地气下降；三候闭塞而成冬。”由于天空中的阳气上升，地中的阴气下降，导致天地不通，阴阳不交，所以万物失去生机，天地闭塞而转入严寒的冬天。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="daxue">
+							     <div class="chianFestival_title">大雪</div>
+							     <div class="chianFestival_summary">2015年大雪时间是12月7日</div>
+							     <div class="chianFestival_content">
+							          <div class="paraMessage">“大雪”节气，通常在每年的12月7或8日，其时视太阳到达黄经255度。《月令七十二候集解》说：“至此而雪盛也。”大雪的意思是天气更冷，降雪的可能性比小雪时更大了，并不指降雪量一定很大。相反，大雪后各地降水量均进一步减少，东北、华北地区12月平均降水量一般只有几毫米，西北地区则不到1毫米；大雪，雪的大小按降雪量分类时，一般降雪量5.0~10毫米。</div>
+									<div class="pparaMessage">老南京有句俗语，叫做“小雪腌菜，大雪腌肉”。大雪节气一到，家家户户忙着腌制“咸货”。大雪是“进补”的好时节，素有“冬天进补，开春打虎”的说法。冬令进补能提高人体的免疫功能，促进新陈代谢，使畏寒的现象得到改善。</div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="dongzhi">
+							     <div class="chianFestival_title">冬至</div>
+							     <div class="chianFestival_summary">2015年秋冬至时间是12月22日</div>
+							     <div class="chianFestival_content">
+							         <div class="paraMessage">冬至（Winter Solstice），是中国农历中一个非常重要的节气，也是中华民族的一个传统节日，冬至俗称“冬节”、“长至节”、“亚岁”等。中国北方大部分地区在这一天还有吃饺子、南方吃汤圆吃南瓜的习俗，谚语：冬至到，吃水饺，还有关于该节气的诗词和影视作品。</div>
+									<div class="paraMessage">冬至作为一个节日，至今已有2500年以上的历史。古人认为自冬至起，天地阳气开始兴作渐强，代表下一个循环开始，是大吉之日。因此，后来一般春节期间的祭祖、家庭聚餐等习俗，也往往出现在冬至。</div>
+									<div class="paraMessage">冬至又被称为“小年”，一是说明年关将近，余日不多；二是表示冬至的重要性。  </div>
+							     </div>
+							</div>
+							
+							<div class='chinaFestivalContent none' id="xiaohan">
+							     <div class="chianFestival_title">小寒</div>
+							     <div class="chianFestival_summary">2015年小寒时间是1月5日</div>
+							     <div class="chianFestival_content">
+							        <div class="paraMessage">小寒是第二十三个节气，在公历1月5-7日之间，太阳位于黄经285°。对于中国而言，小寒标志着开始进入一年中最寒冷的日子。<br/>
+									<div class="paraMessage">中国古代将小寒分为三候：“一候雁北乡，二候鹊始巢，三候雉始鸲”，古人认为候鸟中大雁是顺阴阳而迁移，此时阳气已动，所以大雁开始向北迁移；此时北方到处可见到喜鹊，并且感觉到阳气而开始筑巢；第三候“雉鸲”的“鸲”为鸣叫的意思，雉在接近四九时会感阳气的生长而鸣叫。</div>
+									<div class="paraMessage">到了小寒时节，也是老中医和中药房最忙的时候，一般入冬时熬制的膏方都吃得差不多了。到了此时，有的人家会再熬制一点，吃到春节前后。居民日常饮食也偏重于暖性食物，如羊肉、狗肉。 </div>  
+							     </div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+		</div>		
+	    <script src="js/base.js"></script>
+		<script src="js/wnl.js"></script>
+		<script src="js/lunarjson.js"></script>
+		<script src="js/makeCal.js"></script>
+		<script src="js/index.js"></script>
+		<script src="js/jquery.artDialog.source.js"></script>
+		<script type="text/javascript">
+			var viewHeight = document.documentElement.clientHeight;
+			if(viewHeight <= 320){
+			}else{
+				var height = null;
+				if(platform == 'ANDROID' || platform == 'IOS' || platform == 'WP'){
+					document.getElementById("body").style.cssText += "height:"+(viewHeight - 45)+"px;";
+					document.getElementById("mothDayBody").style.cssText += "height:"+(viewHeight - 45)+"px;";
+					document.getElementById("festivalDayBody").style.cssText += "height:"+(viewHeight - 45)+"px;";
+					document.getElementById("chinaFestivalBody").style.cssText == "height:"+(viewHeight - 45)+"px;";
+					document.getElementById("chinaFestivalMoreBody").style.cssText += "min-height:"+(viewHeight - 45)+"px;";
+					height = $("#body").height();
+				}else{
+					document.getElementById("body").style.cssText += "height:"+(viewHeight - 45 * 2)+"px;";
+					document.getElementById("mothDayBody").style.cssText += "height:"+(viewHeight - 45)+"px;";
+					document.getElementById("festivalDayBody").style.cssText += "height:"+(viewHeight - 45 * 2)+"px;";
+					document.getElementById("chinaFestivalBody").style.cssText += "height:"+(viewHeight - 45 * 2)+"px;";
+					document.getElementById("chinaFestivalMoreBody").style.cssText += "min-height:"+(viewHeight - 45 * 2)+"px;";
+					height = $("#body").height();
+				}
+				document.getElementById("content").style.cssText += "height:"+(height - 52)+"px;";
+				document.getElementById("contentM").style.cssText += "height:"+(height - 52 + 5)+"px;";
+				document.getElementById("fcontentM").style.cssText += "height:"+(height - 52)+"px;";
+				document.getElementById("cContentM").style.cssText += "height:"+(height - 52)+"px;";
+				document.getElementById("fcontentMTable").style.cssText += "height:"+(height - 52 - 46 + 1)+"px;";
+				document.getElementById("cContentMMTable").style.cssText += "height:"+(height - 52 - 47 - 1 + 2)+"px;";
+				document.getElementById("cBcontentM").style.cssText += "height:"+(height - 52 )+"px;";
+			}
+		</script>
+		<script src="js/jquery.touchwipe.min.js"></script>
+<div style="display:none;">
+<!--百度自动推送代码-->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!--百度自动推送代码-->
+
+
+<!-- 网址安全插件开始 -->
+<script type="text/javascript">
+	var _svq_ = _svq_ || [];
+	_svq_.push(['set_api_key', '16adflfafads9gf28327005056b68c3d']);
+	_svq_.push(['set_noicon_class', '']); //链接前不显示任何图标，如果需要显示，请去掉这句
+	_svq_.push(['set_nopopup_class', '-sv-no-popup']); 
+	_svq_.push(['check_page']);
+	(function(){   
+		var aq = document.createElement('script');
+		aq.type = 'text/javascript'; 
+		aq.async = true;   
+		aq.charset = 'utf-8';
+		aq.src = 'http://openapi.anquan.org/static/aq.js';    
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(aq, s); 
+	})();
+</script>	
+<!-- 网址安全插件结束 --> 
+</div>
+<div style="display:none">
+    <script src="http://s11.cnzz.com/z_stat.php?id=610720&web_id=610720" language="JavaScript"></script>
+</div>
+
+<div class="copyright pr" style="text-align: center; margin-left: 0px;">
+	<p>
+		Copyright&nbsp;2004-01-11&nbsp;<a href="http://www.luhui.net" title="鲁虺文化网">luhui.net</a>&nbsp;all rights reserved.
+	</p>
+</div>
+</body>
+</html>

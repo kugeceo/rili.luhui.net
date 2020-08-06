@@ -1,0 +1,176 @@
+#mainCal table{
+	border-collapse: collapse;
+	border-cellspacin:0;
+    margin:0 auto;
+    width:100%;
+    height:100%;	
+}
+#mainCal table td {
+	width:42px;
+	color:#888;
+	border:1px solid #f1f1f1;
+	height:39px;
+	padding: 0;
+}
+.calendar table { position:relative; }
+#mainCal table .tablehead tr td{
+	font-size: 11px;
+	font-family:Microsoft YaHei;
+	margin-bottom:5px;
+	color:#444;
+	border:0;
+	height: 24px;
+}
+.thead{
+    border-right: 0 none;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+}
+.first td { border-top:solid 1px #e0e0e0; }
+#mainCal .block{
+	width: 42px;
+	cursor: pointer;
+	font-family:"Microsoft YaHei";
+	display:table-cell;
+	/*vertical-align: bottom;*/
+}
+#mainCal .block a {
+	color:#999; 
+	font-size:12px;
+}
+.colora{color:#aaa;}
+.block_content{
+	height:100%;
+	padding:0;
+	display:block;
+	color:#444;
+	position:relative;
+	*z-index:0;
+}
+/* #mainCal a.block_content:hover{
+	border:1px solid #54a024;
+display: block;
+position: relative;
+
+}
+#mainCal .block_click a.block_content{
+	border:1px solid #13a1ff;
+display: block;
+position: relative;
+
+} */
+.today {
+}
+#mainCal .today a{
+	background:#69aee4;
+	color:#fff;
+	border:1px solid #3289cc;
+	margin: -1px;
+}
+#mainCal .today a .number,#mainCal .today a .lnumber{
+	color:#fff;
+}
+.today a:hover{
+	color:#000;
+}
+.jprestWork {
+	position:absolute;
+	top:2px;
+	left:2px;
+}
+.jprestWorkw{
+	
+}
+.block5 .jprestWork {
+}
+.numbernone{
+	text-align: center;
+	overflow: hidden;
+	color:#aaa;
+	font-size:20px;
+	height:20px;
+	line-height:20px;
+	padding-top:14px;
+	font-family: "Microsoft YaHei";
+}
+.number{
+	text-align: center;
+	overflow: hidden;
+	color:#444;
+	font-size:18px;
+	height:20px;
+	line-height:20px;
+	padding-top:18px;
+	font-family: "Microsoft YaHei";
+}
+.block5 .number {
+	height: 20px;
+    line-height: 20px;
+    padding-top:14px;
+    font-family: "Microsoft YaHei";
+}
+.lnumber{
+	font-family: "Microsoft YaHei";
+	font-size:10px;
+	text-align: center;
+	overflow: hidden;
+	color:#ccc;
+	height:14px;
+	line-height:14px;
+}
+.block5 .lnumber {
+	height: 14px;
+    line-height: 14px;
+}
+
+#mainCal a,a:hover { text-decoration:none; }
+.ymd-w{
+	height:33px;
+	line-height:33px;
+	position:relative;
+	padding-left:5px;
+	*padding-left:10px;
+}
+.prev_button{
+	background:url(../img/wnl-list.png) no-repeat 4px -89px;
+	_background-image: url(../img/wnl-list-8.png);
+}
+.next_button
+{
+	background:url(../img/wnl-list.png) no-repeat -44px -89px;
+	_background-image: url(../img/wnl-list-8.png);
+}
+a { outline: medium none; }
+
+#year_func, #month_func
+{
+	color: #2A4564;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 26px;
+    text-align: center;
+}
+
+#year_func, #month_func, #prev_button, #next_button
+{
+	display:inline-block;
+	font-family: "Microsoft Yahei";
+}
+#month_num
+{
+	margin-left: 5px;
+}
+.more_events {
+    border-color: #999 transparent transparent;
+    border-right: 4px dashed transparent;
+    border-style: solid dashed dashed;
+    border-width: 4px 4px 0;
+}
+.more_events:hover {
+	border-color: #000 transparent transparent;
+}
+
+#cal_down { position:relative; width:100%; }
+
+

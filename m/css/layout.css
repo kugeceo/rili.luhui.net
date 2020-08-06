@@ -1,0 +1,21 @@
+﻿/*字体的设*/
+body, button, input, select, textarea {
+    font: 12px/1.125 "微软雅黑",Arial,Helvetica,sans-serif;
+}
+
+.clearfix { *zoom:1; }
+.clearfix:before,.clearfix:after { display:table; content:"";}
+.clearfix:after {clear: both;}
+
+
+a { text-decoration:none; }
+.fll { float:left; }
+.flr { float:right; }
+.none { display:none; }
+.block { display:block; }
+.inline { display:inline; }
+.inlineblock { display:inline-block; *display:inline; *zoom:1; }
+.tac { text-align:center; }
+
+/* chrome */
+textarea:focus { box-shadow: none; }
