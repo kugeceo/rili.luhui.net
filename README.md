@@ -45,7 +45,7 @@ http://wannianli.luhui.net
 
 
 ## 鲁虺日历展示
-![鲁虺日历展示](https://wannianli.luhui.net/%E6%97%A5%E5%8E%86%E6%88%AA%E5%9B%BE_20200807073105.jpg)
+![鲁虺日历展示](%E6%97%A5%E5%8E%86%E6%88%AA%E5%9B%BE_20200807073105.jpg)
 
 
 
