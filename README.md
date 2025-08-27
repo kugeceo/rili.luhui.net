@@ -12,9 +12,6 @@ http://rili.luhui.net
 
 http://wannianli.luhui.net
 
-# 鲁虺日历域名
-http://rili.netlify.app
-[![Netlify Status](https://api.netlify.com/api/v1/badges/22d2da23-8473-44ad-a468-f8214af1ebfd/deploy-status)](https://app.netlify.com/sites/rili/deploys)
 
 
 ## 联系我们
@@ -30,7 +27,7 @@ http://rili.netlify.app
 
 手机如何扫码：
 
-![打赏作者](./images/zhifu.png)
+![打赏作者](https://github.com/kugeceo/flash.luhui.net/raw/main/images/zhifu.png))
 
 ① 保存上面二维码图片　② 打开微信、支付宝、手机qq、“扫一扫”　③ 点击右下脚图标　④ 选择刚才保存的图片
 
