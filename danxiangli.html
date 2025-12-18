@@ -1,0 +1,58 @@
+﻿
+<!DOCTYPE html>
+<html lang="zh-CN" style="height:100%;overflow:hidden;">
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit" />
+<meta name="referrer" content="same-origin">
+<meta name="force-rendering" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+<title>鲁虺单向历</title>
+<!--关键词-->
+<meta name="keywords" content="鲁虺单向历魯虺免费图片,海报素材,,高清图片大全,在线设计,矢量图,矢量图库,免费素材模板下载"/>
+<!--描述-->
+<meta name="description" content="鲁虺日历网 http://rili.luhui.net 创意视觉解构,图像技术专业媒体,眼睛是盲目的要用心去洞悉幻觉真相,一站式鲁虺图片搜索引擎群,免费在线以图搜图,免费在线P图，专注正版商用图片素材在线设计与下载的网站！提供矢量图素材、背景图片、psd素材、字体模板、设计素材、PPT模板、视频素材、插画绘画、海报设计模板、网站设计素材等下载服务。全球最好网真互动式种源文化传播交流索引平台 lǔ 鲁 huǐ 虺 wén 文 huà 化 wǎng 网"/>
+<style type="text/css">
+    #rili{height:100%;overflow:hidden;}
+    #rili img{height:100%;overflow:hidden;margin:0 auto;display:block;max-height:100% !important;max-width:100% !important;}
+    @media (max-width:691px) {#rili img{height:auto;width:100%;}}
+  </style>
+  
+<script src="./js/rgbaster.min.js"></script>  
+<!--或
+<script type="text/javascript">
+!function(n,t){"use strict";var e=function(n,t){var e=document.createElement("canvas");return e.setAttribute("width",n),e.setAttribute("height",t),e.getContext("2d")},r=function(n,t){var r=new Image,i=n.src||n;"data:"!==i.substring(0,5)&&(r.crossOrigin="Anonymous"),r.onload=function(){var n=e(r.width,r.height);n.drawImage(r,0,0);var i=n.getImageData(0,0,r.width,r.height);t&&t(i.data)},r.src=i},i=function(n){return["rgba(",n,",0.88)"].join("")},a=function(n){var t=[];for(var e in n)t.push(o(e,n[e]));return t.sort(function(n,t){return t.count-n.count}),t},u=function(n,t){if(n.length>t)return n.slice(0,t);for(var e=n.length-1;t-1>e;e++)n.push(o("0,0,0",0));return n},o=function(n,t){return{name:i(n),count:t}},c=10,s={};s.colors=function(n,e){e=e||{};var o=e.exclude||[],s=e.paletteSize||c;r(n,function(n){for(var r={},c="",f=[],d=0;d<n.length;d+=4)f[0]=n[d],f[1]=n[d+1],f[2]=n[d+2],c=f.join(","),-1===f.indexOf(t)&&0!==n[d+3]&&-1===o.indexOf(i(c))&&(r[c]=c in r?r[c]+1:1);if(e.success){var g=u(a(r),s+1);e.success({dominant:g[0].name,secondary:g[1].name,palette:g.map(function(n){return n.name}).slice(1)})}})},n.RGBaster=n.RGBaster||s}(window);
+</script>
+-->
+
+
+
+<script type="text/javascript">
+    window.onload=function(){getRili()}
+    function getRili(){
+      var d=new Date(),y=d.getFullYear(),m=d.getMonth()+1,n=d.getDate();
+      m=m>9?m:"0"+m;n=n>9?n:"0"+n;
+      var imgSrc = "https://img.owspace.com/Public/uploads/Download/"+y+"/"+m+n+".jpg"
+      var img= '<img  src="'+imgSrc+'" onclick="getRili()" />'
+      document.getElementById("rili").innerHTML=img
+      RGBaster.colors(imgSrc, {
+        paletteSize: 10, // 调色板大小
+        exclude: [ 'rgba(255,255,255,0.88)','rgba(0,0,0,0.88)' ],  // 不包括白色
+        success: function(payload) {
+          // payload.dominant 是主色，RGB形式表示
+          // payload.secondary 是次色，RGB形式表示
+          // payload.palette 是调色板，含多个主要颜色，数组
+          console.log(payload.palette);
+          var bgColor = payload.dominant
+          document.getElementById('rili').style.backgroundColor = bgColor;
+        }
+      });
+    }
+  </script>
+</head>
+<body id="rili"></body>
+</html>

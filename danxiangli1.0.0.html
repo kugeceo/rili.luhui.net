@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单向历 - 2025年8月27日</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 配置Tailwind自定义颜色和字体 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E88E5',
+                        favorable: '#34D399',
+                        unfavorable: '#F87171',
+                        border: '#E5E7EB'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .calendar-shadow {
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4 font-sans">
+    <!-- 日历卡片容器 -->
+    <div class="calendar-container w-full max-w-md bg-white rounded-xl calendar-shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+        <div class="p-6 md:p-8">
+            <!-- 公历日期和星期 -->
+            <div class="text-right text-gray-600 mb-2">
+                <span id="solar-date" class="text-lg md:text-xl font-medium">2025年8月</span>
+                <span class="ml-2" id="weekday">（星期三）</span>
+            </div>
+            
+            <!-- 日期数字 -->
+            <div class="flex justify-center my-4 md:my-6">
+                <span id="day-number" class="text-[80px] md:text-[100px] font-light text-primary leading-none">27</span>
+            </div>
+            
+            <!-- 农历日期 -->
+            <div class="text-center text-gray-800 text-xl md:text-2xl font-medium mb-3">
+                <span id="lunar-date">七月初五</span>
+            </div>
+            
+            <!-- 干支纪年 -->
+            <div class="text-center text-gray-600 text-sm md:text-base mb-6 pb-4 border-b border-border">
+                <span id="ganzhi-year">乙巳年【蛇年】</span>
+                <span class="mx-2">•</span>
+                <span id="ganzhi-month">甲申月</span>
+                <span id="ganzhi-day">戊辰日</span>
+            </div>
+            
+            <!-- 宜忌 -->
+            <div class="space-y-5">
+                <!-- 宜 -->
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 w-6 h-6 rounded-full bg-favorable flex items-center justify-center mr-3 mt-0.5">
+                        <i class="fa fa-check text-white text-xs"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-favorable font-medium mb-1">宜</h3>
+                        <p id="favorable-activities" class="text-gray-700 text-sm md:text-base text-balance">
+                            安机械 纳采 订盟 祭祀 祈福 拆卸 修造 动土 起基 移徙 入宅 造庙 安香 补垣 塞穴 拆卸 放水 出火 安床 栽种 破土 安葬
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 忌 -->
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 w-6 h-6 rounded-full bg-unfavorable flex items-center justify-center mr-3 mt-0.5">
+                        <i class="fa fa-times text-white text-xs"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-unfavorable font-medium mb-1">忌</h3>
+                        <p id="unfavorable-activities" class="text-gray-700 text-sm md:text-base text-balance">
+                            入宅 嫁娶 掘井 牧养
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 底部装饰条 -->
+        <div class="h-1 bg-gradient-to-r from-primary to-blue-400"></div>
+    </div>
+
+    <script>
+        // 自动获取并显示当前日期
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取当前日期
+            const now = new Date();
+            
+            // 格式化公历日期
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1; // 月份从0开始
+            const day = now.getDate();
+            
+            // 星期几的中文表示
+            const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            const weekday = weekdays[now.getDay()];
+            
+            // 更新页面上的公历日期
+            document.getElementById('solar-date').textContent = `${year}年${month}月`;
+            document.getElementById('weekday').textContent = `（${weekday}）`;
+            document.getElementById('day-number').textContent = day;
+            
+            // 注意：农历和干支信息需要复杂的算法转换
+            // 这里为了演示使用了固定值，实际应用中需要实现农历转换算法
+        });
+    </script>
+</body>
+</html>

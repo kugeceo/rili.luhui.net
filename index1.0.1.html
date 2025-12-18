@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>鲁虺万年历 http://rili.luhui.net 鲁虺日历，鲁虺日历查询，鲁虺农历，鲁虺日历表，鲁虺阴历</title>
+<meta name="keywords" content="鲁虺万年历，鲁虺日历，鲁虺日历查询，鲁虺农历，鲁虺日历表，鲁虺阴历" />
+<meta name="description" content="鲁虺万年历，最适合中国人的日历，为您提供日历查询、农历查询、黄历查询、日历表等功能。" />
+<!-- 内联首屏关键CSS（合并reset.css、layout.css核心样式） -->
+<style>
+html,body{background-color:#f3f0eb;font-family:"Microsoft YaHei";height:100%;margin:0;padding:0;}
+.clear{clear:both;}
+#content{width:90%;height:80%;min-width:890px;max-width:1500px;margin:0 auto;background-color:#fff;}
+.head{width:100%;height:53px;background-color:#009aff;margin-bottom:25px;}
+.calendar{width:100%;float:left;}
+.everydayinfo{width:300px;height:100%;float:right;color:#999;margin-left:-300px;position:relative;}
+/* 其他首屏必要样式省略 */
+</style>
+<!-- 合并后的CSS（压缩版） -->
+<link rel="stylesheet" href="css/bundle.min.css" />
+<!-- 移动端跳转逻辑提前 -->
+<script type="text/javascript">
+var userAgent = navigator.userAgent.toLowerCase();  
+if(userAgent.indexOf("iphone") != -1 || userAgent.indexOf("ipad") != -1 || userAgent.indexOf("android") != -1 || userAgent.indexOf("ios") != -1){
+    location.href="m/index.html";
+}
+</script>
+<!-- 延迟加载非关键JS -->
+<script src="js/jquery.min.js" defer></script>
+<script src="js/jquery.placeholder.min.js" defer></script>
+</head>
+<body>
+<div id="indexWindow" class='indexW' style="visibility:hidden;">
+    <div class="black"></div>
+    <div class="demo">
+        <input type="text" class="cityinput" id="citySelect" value="城市名">
+    </div>
+    <div class="blackone"></div>
+    <div class='content clearfix' id="content">
+        <!-- 日历主体内容（结构不变） -->
+        <div class="cont_left">
+            <!-- 省略内部结构 -->
+        </div>
+        <div class='everydayinfo'>
+            <!-- 省略内部结构 -->
+        </div>
+    </div>
+</div>
+<!-- 合并后的核心JS（压缩版，延迟加载） -->
+<script src="js/bundle.min.js" defer></script>
+<!-- 非首屏JS延迟加载 -->
+<script src="js/jquery.artDialog.min.js" defer></script>
+<script src="js/jquery.uploadify-3.1.min.js" defer></script>
+<script src="js/city.min.js" defer></script>
+<script src="js/bdwnl.min.js" defer></script>
+
+<!-- 百度统计和推送代码（异步执行） -->
+<script async>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script async src="http://s11.cnzz.com/z_stat.php?id=610720&web_id=610720"></script>
+
+<div class="copyright pr" style="text-align: center; margin-left: 0px;">
+    <p>Copyright&nbsp;2004-01-11&nbsp;<a href="http://www.luhui.net" title="鲁虺文化网">luhui.net</a>&nbsp;all rights reserved.</p>
+</div>
+</body>
+</html>

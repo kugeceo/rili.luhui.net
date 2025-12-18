@@ -1,0 +1,149 @@
+﻿
+<!DOCTYPE html>
+<html lang="zh-CN" style="height:100%;overflow:hidden;">
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit" />
+<meta name="referrer" content="same-origin">
+<meta name="force-rendering" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+<title>鲁虺单向历</title>
+<!--关键词-->
+<meta name="keywords" content="鲁虺单向历魯虺免费图片,海报素材,,高清图片大全,在线设计,矢量图,矢量图库,免费素材模板下载"/>
+<!--描述-->
+<meta name="description" content="鲁虺日历网 http://rili.luhui.net 创意视觉解构,图像技术专业媒体,眼睛是盲目的要用心去洞悉幻觉真相,一站式鲁虺图片搜索引擎群,免费在线以图搜图,免费在线P图，专注正版商用图片素材在线设计与下载的网站！提供矢量图素材、背景图片、psd素材、字体模板、设计素材、PPT模板、视频素材、插画绘画、海报设计模板、网站设计素材等下载服务。全球最好网真互动式种源文化传播交流索引平台 lǔ 鲁 huǐ 虺 wén 文 huà 化 wǎng 网"/>
+<style type="text/css">
+    #rili{height:100%;overflow:hidden;position: relative;}
+    #rili img{height:100%;overflow:hidden;margin:0 auto;display:block;max-height:100% !important;max-width:100% !important;}
+    @media (max-width:691px) {#rili img{height:auto;width:100%;}}
+    
+    /* 翻页按钮样式 */
+    .page-btn {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 30%;
+        cursor: pointer;
+        z-index: 10;
+        opacity: 0;
+    }
+    .prev-btn {
+        left: 0;
+    }
+    .next-btn {
+        right: 0;
+    }
+    .page-indicator {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        background: rgba(0,0,0,0.5);
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 16px;
+        z-index: 5;
+    }
+  </style>
+
+
+<script type="text/javascript">
+!function(n,t){"use strict";var e=function(n,t){var e=document.createElement("canvas");return e.setAttribute("width",n),e.setAttribute("height",t),e.getContext("2d")},r=function(n,t){var r=new Image,i=n.src||n;"data:"!==i.substring(0,5)&&(r.crossOrigin="Anonymous"),r.onload=function(){var n=e(r.width,r.height);n.drawImage(r,0,0);var i=n.getImageData(0,0,r.width,r.height);t&&t(i.data)},r.src=i},i=function(n){return["rgba(",n,",0.88)"].join("")},a=function(n){var t=[];for(var e in n)t.push(o(e,n[e]));return t.sort(function(n,t){return t.count-n.count}),t},u=function(n,t){if(n.length>t)return n.slice(0,t);for(var e=n.length-1;t-1>e;e++)n.push(o("0,0,0",0));return n},o=function(n,t){return{name:i(n),count:t}},c=10,s={};s.colors=function(n,e){e=e||{};var o=e.exclude||[],s=e.paletteSize||c;r(n,function(n){for(var r={},c="",f=[],d=0;d<n.length;d+=4)f[0]=n[d],f[1]=n[d+1],f[2]=n[d+2],c=f.join(","),-1===f.indexOf(t)&&0!==n[d+3]&&-1===o.indexOf(i(c))&&(r[c]=c in r?r[c]+1:1);if(e.success){var g=u(a(r),s+1);e.success({dominant:g[0].name,secondary:g[1].name,palette:g.map(function(n){return n.name}).slice(1)})}})},n.RGBaster=n.RGBaster||s}(window);
+</script>
+
+
+
+<script type="text/javascript">
+    let currentDate = new Date(); // 当前显示的日期
+    
+    window.onload=function(){
+        getRili();
+        // 添加键盘事件监听
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevDate();
+            } else if (e.key === 'ArrowRight') {
+                nextDate();
+            }
+        });
+    }
+    
+    // 显示上一天
+    function prevDate() {
+        currentDate.setDate(currentDate.getDate() - 1);
+        getRili();
+    }
+    
+    // 显示下一天
+    function nextDate() {
+        currentDate.setDate(currentDate.getDate() + 1);
+        getRili();
+    }
+    
+    function getRili(){
+      var y = currentDate.getFullYear(),
+          m = currentDate.getMonth() + 1,
+          n = currentDate.getDate();
+      
+      // 格式化月份和日期为两位数
+      m = m > 9 ? m : "0" + m;
+      n = n > 9 ? n : "0" + n;
+      
+      // 显示当前日期
+      const dateStr = `${y}年${m}月${n}日`;
+      
+      var imgSrc = "https://img.owspace.com/Public/uploads/Download/"+y+"/"+m+n+".jpg";
+      
+      // 构建包含翻页按钮和日期显示的HTML
+      var img = `
+          <div class="page-btn prev-btn" onclick="prevDate()"></div>
+          <div class="page-btn next-btn" onclick="nextDate()"></div>
+          <div class="page-indicator">${dateStr}</div>
+          <img src="${imgSrc}" onclick="nextDate()" />
+      `;
+      
+      document.getElementById("rili").innerHTML = img;
+      
+      RGBaster.colors(imgSrc, {
+        paletteSize: 10, // 调色板大小
+        exclude: [ 'rgba(255,255,255,0.88)','rgba(0,0,0,0.88)' ],  // 不包括白色
+        success: function(payload) {
+          console.log(payload.palette);
+          var bgColor = payload.dominant;
+          document.getElementById('rili').style.backgroundColor = bgColor;
+        }
+      });
+    }
+  </script>
+</head>
+<body id="rili"></body>
+</html>
+
+
+<!--功能
+
+
+增加翻页动画效果
+
+以下是增加了左右翻页功能的代码，通过点击左右区域或使用左右方向键可以切换日期：
+
+主要修改内容：
+
+1. 新增了翻页功能相关的CSS样式，包括左右点击区域和日期指示器
+2. 添加了`currentDate`变量用于跟踪当前显示的日期
+3. 实现了`prevDate()`和`nextDate()`函数用于切换日期
+4. 修改了`getRili()`函数，使其基于`currentDate`加载对应日期的图片
+5. 添加了键盘事件监听，支持左右方向键翻页
+6. 在页面中添加了日期显示指示器，方便用户了解当前查看的日期
+7. 点击左侧区域或左方向键查看上一天，点击右侧区域或右方向键查看下一天，点击图片默认查看下一天
+
+这样用户就可以方便地在不同日期之间切换浏览了。
+
+
+更新-->
+

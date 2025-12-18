@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height:100%;overflow:hidden;">
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit" />
+<meta name="referrer" content="same-origin">
+<meta name="force-rendering" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+<title>鲁虺单向历</title>
+<!--关键词-->
+<meta name="keywords" content="鲁虺单向历魯虺免费图片,海报素材,,高清图片大全,在线设计,矢量图,矢量图库,免费素材模板下载"/>
+<!--描述-->
+<meta name="description" content="鲁虺日历网 http://rili.luhui.net 创意视觉解构,图像技术专业媒体,眼睛是盲目的要用心去洞悉幻觉真相,一站式鲁虺图片搜索引擎群,免费在线以图搜图,免费在线P图，专注正版商用图片素材在线设计与下载的网站！"/>
+<style type="text/css">
+    #rili{height:100%;overflow:hidden;position: relative;}
+    #rili-container {
+        height: 100%;
+        transition: all 0.6s ease;
+        transform-origin: center;
+        backface-visibility: hidden;
+    }
+    #rili img{height:100%;overflow:hidden;margin:0 auto;display:block;max-height:100% !important;max-width:100% !important;}
+    @media (max-width:691px) {#rili img{height:auto;width:100%;}}
+    
+    /* 翻页按钮样式 */
+    .page-btn {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 30%;
+        cursor: pointer;
+        z-index: 10;
+        opacity: 0;
+    }
+    .prev-btn {
+        left: 0;
+    }
+    .next-btn {
+        right: 0;
+    }
+    .page-indicator {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        background: rgba(0,0,0,0.5);
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 16px;
+        z-index: 5;
+        transition: opacity 0.3s ease;
+    }
+    
+    /* 多种翻页动画样式 */
+    /* 1. 滑动效果 */
+    .slide-out-left {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    .slide-out-right {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    
+    /* 2. 缩放效果 */
+    .zoom-out {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    
+    /* 3. 翻书效果 - 核心效果 */
+    .book-flip-left {
+        animation: bookFlipLeft 0.6s forwards;
+        transform-origin: left center;
+    }
+    .book-flip-right {
+        animation: bookFlipRight 0.6s forwards;
+        transform-origin: right center;
+    }
+    
+    @keyframes bookFlipLeft {
+        0% { transform: rotateY(0deg); opacity: 1; }
+        50% { transform: rotateY(-45deg); opacity: 0.7; }
+        100% { transform: rotateY(-90deg); opacity: 0; }
+    }
+    
+    @keyframes bookFlipRight {
+        0% { transform: rotateY(0deg); opacity: 1; }
+        50% { transform: rotateY(45deg); opacity: 0.7; }
+        100% { transform: rotateY(90deg); opacity: 0; }
+    }
+    
+    /* 4. 淡入淡出效果 */
+    .fade-out {
+        opacity: 0;
+    }
+    
+    /* 5. 旋转效果 */
+    .rotate-out {
+        opacity: 0;
+        transform: rotate(10deg) scale(0.9);
+    }
+    
+    /* 初始显示效果 */
+    .fade-in {
+        opacity: 1;
+        transform: translateX(0) scale(1) rotate(0);
+    }
+</style>
+
+
+<script type="text/javascript">
+!function(n,t){"use strict";var e=function(n,t){var e=document.createElement("canvas");return e.setAttribute("width",n),e.setAttribute("height",t),e.getContext("2d")},r=function(n,t){var r=new Image,i=n.src||n;"data:"!==i.substring(0,5)&&(r.crossOrigin="Anonymous"),r.onload=function(){var n=e(r.width,r.height);n.drawImage(r,0,0);var i=n.getImageData(0,0,r.width,r.height);t&&t(i.data)},r.src=i},i=function(n){return["rgba(",n,",0.88)"].join("")},a=function(n){var t=[];for(var e in n)t.push(o(e,n[e]));return t.sort(function(n,t){return t.count-n.count}),t},u=function(n,t){if(n.length>t)return n.slice(0,t);for(var e=n.length-1;t-1>e;e++)n.push(o("0,0,0",0));return n},o=function(n,t){return{name:i(n),count:t}},c=10,s={};s.colors=function(n,e){e=e||{};var o=e.exclude||[],s=e.paletteSize||c;r(n,function(n){for(var r={},c="",f=[],d=0;d<n.length;d+=4)f[0]=n[d],f[1]=n[d+1],f[2]=n[d+2],c=f.join(","),-1===f.indexOf(t)&&0!==n[d+3]&&-1===o.indexOf(i(c))&&(r[c]=c in r?r[c]+1:1);if(e.success){var g=u(a(r),s+1);e.success({dominant:g[0].name,secondary:g[1].name,palette:g.map(function(n){return n.name}).slice(1)})}})},n.RGBaster=n.RGBaster||s}(window);
+</script>
+
+
+
+<script type="text/javascript">
+    // 初始化当前日期 - 优先从URL获取，否则使用当前日期
+    let currentDate;
+    const urlParams = new URLSearchParams(window.location.search);
+    const dateParam = urlParams.get('date');
+    
+    if (dateParam && /^\d{4}-\d{2}-\d{2}$/.test(dateParam)) {
+        currentDate = new Date(dateParam);
+    } else {
+        currentDate = new Date();
+    }
+    
+    let isAnimating = false; // 动画状态锁
+    let lastAnimation = -1; // 记录上一次使用的动画索引
+    
+    // 定义多种翻页动画效果
+    const animations = [
+        { 
+            prev: 'slide-out-right', 
+            next: 'slide-out-left',
+            name: '滑动效果'
+        },
+        { 
+            prev: 'zoom-out', 
+            next: 'zoom-out',
+            name: '缩放效果'
+        },
+        { 
+            prev: 'book-flip-right', 
+            next: 'book-flip-left',
+            name: '翻书效果'
+        },
+        { 
+            prev: 'fade-out', 
+            next: 'fade-out',
+            name: '淡入淡出'
+        },
+        { 
+            prev: 'rotate-out', 
+            next: 'rotate-out',
+            name: '旋转效果'
+        }
+    ];
+    
+    window.onload = function() {
+        updateUrlWithDate(); // 更新URL显示当前日期
+        getRili();
+        
+        // 键盘事件监听
+        document.addEventListener('keydown', function(e) {
+            if (isAnimating) return;
+            
+            if (e.key === 'ArrowLeft') {
+                prevDate();
+            } else if (e.key === 'ArrowRight') {
+                nextDate();
+            }
+        });
+    }
+    
+    // 随机选择一个与上次不同的动画
+    function getRandomAnimation() {
+        let animIndex;
+        do {
+            animIndex = Math.floor(Math.random() * animations.length);
+        } while (animIndex === lastAnimation && animations.length > 1);
+        
+        lastAnimation = animIndex;
+        return animations[animIndex];
+    }
+    
+    // 更新URL中的日期参数
+    function updateUrlWithDate() {
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const dateStr = `${year}-${month}-${day}`;
+        
+        // 更新URL而不刷新页面
+        history.pushState(null, '', `?date=${dateStr}`);
+    }
+    
+    // 显示上一天
+    function prevDate() {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        const container = document.getElementById('rili-container');
+        const animation = getRandomAnimation();
+        
+        // 添加动画类
+        container.classList.add(animation.prev);
+        
+        setTimeout(() => {
+            currentDate.setDate(currentDate.getDate() - 1);
+            updateUrlWithDate(); // 更新URL
+            getRili(() => {
+                // 移除动画类
+                container.classList.remove(animation.prev);
+                isAnimating = false;
+            });
+        }, 600); // 与动画时长匹配
+    }
+    
+    // 显示下一天
+    function nextDate() {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        const container = document.getElementById('rili-container');
+        const animation = getRandomAnimation();
+        
+        // 添加动画类
+        container.classList.add(animation.next);
+        
+        setTimeout(() => {
+            currentDate.setDate(currentDate.getDate() + 1);
+            updateUrlWithDate(); // 更新URL
+            getRili(() => {
+                // 移除动画类
+                container.classList.remove(animation.next);
+                isAnimating = false;
+            });
+        }, 600); // 与动画时长匹配
+    }
+    
+    function getRili(callback) {
+        const y = currentDate.getFullYear();
+        const m = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const d = String(currentDate.getDate()).padStart(2, '0');
+        
+        // 显示当前日期
+        const dateStr = `${y}年${m}月${d}日`;
+        
+        const imgSrc = `https://img.owspace.com/Public/uploads/Download/${y}/${m}${d}.jpg`;
+        
+        // 构建页面内容
+        const content = `
+            <div class="page-btn prev-btn" onclick="prevDate()"></div>
+            <div class="page-btn next-btn" onclick="nextDate()"></div>
+            <div class="page-indicator">${dateStr}</div>
+            <img src="${imgSrc}" onclick="nextDate()" alt="${dateStr}的日历图片" />
+        `;
+        
+        // 更新容器内容
+        document.getElementById("rili").innerHTML = `<div id="rili-container" class="fade-in">${content}</div>`;
+        
+        // 提取图片主色调设置背景
+        RGBaster.colors(imgSrc, {
+            paletteSize: 10,
+            exclude: ['rgba(255,255,255,0.88)', 'rgba(0,0,0,0.88)'],
+            success: function(payload) {
+                document.getElementById('rili').style.backgroundColor = payload.dominant;
+                callback && callback();
+            }
+        });
+    }
+</script>
+</head>
+<body id="rili"></body>
+</html>
+
+
+<!--功能
+
+
+添加更多类型的翻页动画，翻书等效果，每翻一次效果都不一样，增加在地址栏显示对应年月日时间
+
+我将为您添加多种翻页动画效果（包括翻书效果），实现每次翻页使用不同动画，并在地址栏显示当前日期。以下是完整实现：
+
+
+
+主要更新内容说明：
+
+1. 新增多种翻页动画效果：
+   - 滑动效果：左右平滑滑动切换
+   - 缩放效果：缩放并淡出切换
+   - 翻书效果：模拟真实翻书的3D旋转效果（核心动画）
+   - 淡入淡出：透明度渐变切换
+   - 旋转效果：伴随旋转的缩放淡出效果
+
+2. 动画随机切换机制：
+   - 每次翻页会随机选择一种动画效果
+   - 确保不会连续使用同一种动画
+   - 通过动画索引记录避免重复
+
+3. 地址栏日期显示：
+   - 在URL中以`?date=YYYY-MM-DD`格式显示当前日期
+   - 支持直接通过URL访问特定日期
+   - 使用`history.pushState`更新URL而不刷新页面
+
+4. 代码优化：
+   - 使用`String.padStart`简化日期格式化
+   - 重构动画类管理逻辑
+   - 增加图片alt属性提高可访问性
+   - 延长动画时长至0.6秒，使翻书效果更自然
+
+现在，每次翻页都会呈现不同的动画效果，地址栏也会实时显示当前查看的日期，提升了整体交互体验。
+
+
+更新-->
+
+
+
